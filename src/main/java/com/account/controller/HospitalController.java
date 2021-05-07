@@ -32,7 +32,7 @@ public class HospitalController {
     public UnifyResponse page() {
         int pageSize = 10;
         int currentPage = 0;
-        Sort sort = Sort.by(Sort.Direction.DESC, "create_time");
+        Sort sort = Sort.by(Sort.Direction.DESC, "createTime");
         Pageable pageable = PageRequest.of(currentPage, pageSize, sort);
 
         return hospitalService.page(pageable);
