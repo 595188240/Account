@@ -1,8 +1,8 @@
 package com.account.repository;
 
 import com.account.entity.User;
+import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
-import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 
 /**
@@ -15,7 +15,7 @@ import org.springframework.stereotype.Repository;
  * 2021/4/28     ffdeng         1.0       Initial Version
  **/
 @Repository
-public interface UserRepository extends CrudRepository<User, Long>, JpaSpecificationExecutor<User> {
+public interface UserRepository extends JpaRepository<User, Long>, JpaSpecificationExecutor<User> {
 
     User findByUserNameAndPasswordAndIsDelete(String userName, String password, Integer isDelete);
 

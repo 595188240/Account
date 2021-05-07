@@ -1,7 +1,8 @@
 package com.account.repository;
 
 import com.account.entity.In;
-import org.springframework.data.repository.CrudRepository;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 import org.springframework.stereotype.Repository;
 
 /**
@@ -14,6 +15,6 @@ import org.springframework.stereotype.Repository;
  * 2021/4/28     ffdeng         1.0       Initial Version
  **/
 @Repository
-public interface InRepository extends CrudRepository<In, Long> {
+public interface InRepository extends JpaRepository<In, Long>, JpaSpecificationExecutor<In> {
 
 }
