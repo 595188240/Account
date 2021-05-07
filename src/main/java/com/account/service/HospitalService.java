@@ -2,7 +2,6 @@ package com.account.service;
 
 import com.account.dto.HospitalDto;
 import com.account.entity.Hospital;
-import com.account.entity.User;
 import com.account.repository.HospitalRepository;
 import com.account.response.UnifyResponse;
 import com.account.vo.PageResultModel;
@@ -32,7 +31,7 @@ public class HospitalService {
     private HospitalRepository hospitalRepository;
 
     public UnifyResponse page(Pageable pageable) {
-        PageResultModel<User> pageResultModel = new PageResultModel();
+        PageResultModel<Hospital> pageResultModel = new PageResultModel();
         Page<Hospital> page = hospitalRepository.findAll((root, query, cb) -> {
             List<Predicate> predicates = new ArrayList();
 //            if (StringUtils.isNotBlank(custCode)) {

@@ -1,9 +1,9 @@
 package com.account.controller;
 
 import com.account.dto.IdDto;
-import com.account.dto.OutDto;
+import com.account.dto.InDto;
 import com.account.response.UnifyResponse;
-import com.account.service.OutService;
+import com.account.service.InService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -20,35 +20,35 @@ import org.springframework.web.bind.annotation.RestController;
  * 2021/5/6     ffdeng         1.0       Initial Version
  **/
 @RestController
-@RequestMapping("/out")
-public class OutController {
+@RequestMapping("/inAccount")
+public class InAccountController {
 
     @Autowired
-    private OutService outService;
+    private InService inService;
 
     @PostMapping("/page")
     public UnifyResponse page() {
-        return outService.page();
+        return inService.page();
     }
 
     @PostMapping("/save")
-    public UnifyResponse save(@RequestBody OutDto dto) {
-        return UnifyResponse.success(outService.save(dto));
+    public UnifyResponse save(@RequestBody InDto dto) {
+        return UnifyResponse.success(inService.save(dto));
     }
 
     @PostMapping("/getOne")
     public UnifyResponse getOne(@RequestBody IdDto dto) {
-        return UnifyResponse.success(outService.getOne(dto.getId()));
+        return UnifyResponse.success(inService.getOne(dto.getId()));
     }
 
     @PostMapping("/edit")
-    public UnifyResponse edit(@RequestBody OutDto dto) {
-        return UnifyResponse.success(outService.edit(dto));
+    public UnifyResponse edit(@RequestBody InDto dto) {
+        return UnifyResponse.success(inService.edit(dto));
     }
 
     @PostMapping("/delete")
     public UnifyResponse delete(@RequestBody IdDto dto) {
-        outService.delete(dto.getId());
+        inService.delete(dto.getId());
         return UnifyResponse.success();
     }
 

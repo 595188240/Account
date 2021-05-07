@@ -1,6 +1,9 @@
 package com.account.entity;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 import javax.persistence.*;
+import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.Date;
 
@@ -14,20 +17,19 @@ import java.util.Date;
  * 2021/5/6     ffdeng         1.0       Initial Version
  **/
 @Entity
-@Table(name = "out")
-public class Out {
+@Table(name = "out_account")
+public class OutAccount implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private Long hospitalId;
     private BigDecimal money;
-    private String remark;
+    private String outDesc;
+    @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss")
     private Date createTime = new Date();
+    @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss")
     private Date modifyTime;
     private Integer isDelete = 0;
-
-    public Out() {
-    }
 
     public Long getId() {
         return id;
@@ -53,14 +55,6 @@ public class Out {
         this.money = money;
     }
 
-    public String getRemark() {
-        return remark;
-    }
-
-    public void setRemark(String remark) {
-        this.remark = remark;
-    }
-
     public Date getCreateTime() {
         return createTime;
     }
@@ -83,5 +77,13 @@ public class Out {
 
     public void setIsDelete(Integer isDelete) {
         this.isDelete = isDelete;
+    }
+
+    public String getOutDesc() {
+        return outDesc;
+    }
+
+    public void setOutDesc(String outDesc) {
+        this.outDesc = outDesc;
     }
 }

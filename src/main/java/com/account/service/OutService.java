@@ -1,7 +1,7 @@
 package com.account.service;
 
 import com.account.dto.OutDto;
-import com.account.entity.Out;
+import com.account.entity.OutAccount;
 import com.account.repository.OutRepository;
 import com.account.response.UnifyResponse;
 import com.account.vo.PageResultModel;
@@ -38,8 +38,8 @@ public class OutService {
         Sort sort = Sort.by(Sort.Direction.DESC, "createTime");
         Pageable pageable = PageRequest.of(currentPage, pageSize, sort);
 
-        PageResultModel<Out> pageResultModel = new PageResultModel();
-        Page<Out> page = outRepository.findAll((root, query, cb) -> {
+        PageResultModel<OutAccount> pageResultModel = new PageResultModel();
+        Page<OutAccount> page = outRepository.findAll((root, query, cb) -> {
             List<Predicate> predicates = new ArrayList();
 //            if (StringUtils.isNotBlank(custCode)) {
 //                predicates.add(cb.equal(root.get("custCode"), custCode));
@@ -59,29 +59,29 @@ public class OutService {
         return UnifyResponse.success(pageResultModel);
     }
 
-    public Out save(OutDto dto) {
-        Out out = new Out();
+    public OutAccount save(OutDto dto) {
+        OutAccount out = new OutAccount();
         out.setHospitalId(dto.getHospitalId());
         out.setMoney(dto.getMoney());
-        out.setRemark(dto.getRemark());
+        out.setOutDesc(dto.getRemark());
         return outRepository.save(out);
     }
 
-    public Out getOne(long id) {
+    public OutAccount getOne(long id) {
         return outRepository.findById(id).get();
     }
 
-    public Out edit(OutDto dto) {
-        Out out = getOne(dto.getId());
+    public OutAccount edit(OutDto dto) {
+        OutAccount out = getOne(dto.getId());
         out.setHospitalId(dto.getHospitalId());
         out.setMoney(dto.getMoney());
-        out.setRemark(dto.getRemark());
+        out.setOutDesc(dto.getRemark());
         out.setModifyTime(new Date());
         return outRepository.save(out);
     }
 
     public void delete(long id) {
-        Out one = getOne(id);
+        OutAccount one = getOne(id);
         one.setModifyTime(new Date());
         one.setIsDelete(1);
         outRepository.save(one);

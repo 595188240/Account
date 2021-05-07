@@ -1,6 +1,9 @@
 package com.account.entity;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 import javax.persistence.*;
+import java.io.Serializable;
 import java.util.Date;
 
 /**
@@ -14,28 +17,17 @@ import java.util.Date;
  **/
 @Entity
 @Table(name = "user")
-public class User {
-
+public class User implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String userName;
     private String password;
+    @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss")
     private Date createTime = new Date();
+    @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss")
     private Date modifyTime;
     private Integer isDelete = 0;
-
-    public User() {
-    }
-
-    public User(Long id, String userName, String password, Date createTime, Date modifyTime, Integer isDelete) {
-        this.id = id;
-        this.userName = userName;
-        this.password = password;
-        this.createTime = createTime;
-        this.modifyTime = modifyTime;
-        this.isDelete = isDelete;
-    }
 
     public Long getId() {
         return id;

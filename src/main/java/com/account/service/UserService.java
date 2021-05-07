@@ -63,7 +63,7 @@ public class UserService {
         return UnifyResponse.success(pageResultModel);
     }
 
-    public Object insertUser(User user) {
+    public User insertUser(User user) {
         return userRepository.save(user);
     }
 

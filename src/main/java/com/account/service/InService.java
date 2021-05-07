@@ -1,7 +1,7 @@
 package com.account.service;
 
 import com.account.dto.InDto;
-import com.account.entity.In;
+import com.account.entity.InAccount;
 import com.account.repository.InRepository;
 import com.account.response.UnifyResponse;
 import com.account.vo.PageResultModel;
@@ -38,8 +38,8 @@ public class InService {
         Sort sort = Sort.by(Sort.Direction.DESC, "createTime");
         Pageable pageable = PageRequest.of(currentPage, pageSize, sort);
 
-        PageResultModel<In> pageResultModel = new PageResultModel();
-        Page<In> page = inRepository.findAll((root, query, cb) -> {
+        PageResultModel<InAccount> pageResultModel = new PageResultModel();
+        Page<InAccount> page = inRepository.findAll((root, query, cb) -> {
             List<Predicate> predicates = new ArrayList();
 //            if (StringUtils.isNotBlank(custCode)) {
 //                predicates.add(cb.equal(root.get("custCode"), custCode));
@@ -59,28 +59,28 @@ public class InService {
         return UnifyResponse.success(pageResultModel);
     }
 
-    public In getOne(long id) {
+    public InAccount getOne(long id) {
         return inRepository.getOne(id);
     }
 
-    public In save(InDto dto) {
-        In in = new In();
+    public InAccount save(InDto dto) {
+        InAccount in = new InAccount();
         in.setHospitalId(dto.getHospitalId());
         in.setMoney(dto.getMoney());
-        in.setRemark(dto.getRemark());
+        in.setInDesc(dto.getRemark());
         return inRepository.save(in);
     }
 
-    public In edit(InDto dto) {
-        In in = getOne(dto.getId());
+    public InAccount edit(InDto dto) {
+        InAccount in = getOne(dto.getId());
         in.setHospitalId(dto.getHospitalId());
         in.setMoney(dto.getMoney());
-        in.setRemark(dto.getRemark());
+        in.setInDesc(dto.getRemark());
         return inRepository.save(in);
     }
 
     public void delete(long id) {
-        In one = getOne(id);
+        InAccount one = getOne(id);
         one.setModifyTime(new Date());
         one.setIsDelete(1);
         inRepository.save(one);
