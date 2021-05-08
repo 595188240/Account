@@ -5,10 +5,15 @@ import com.account.entity.User;
 import com.account.response.UnifyResponse;
 import com.account.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.RestControllerAdvice;
 
+import javax.validation.Valid;
+import java.util.List;
 import java.util.Objects;
 
 /**
@@ -21,18 +26,29 @@ import java.util.Objects;
  * 2021/4/28     ffdeng         1.0       Initial Version
  **/
 @RestController
+@RestControllerAdvice
 public class LoginController {
 
     @Autowired
     private UserService userService;
 
     @PostMapping("/login")
-    public UnifyResponse login(@RequestBody UserDto dto) {
+    public UnifyResponse login(@Valid @RequestBody UserDto dto, BindingResult result) {
+        if (result.hasErrors()) {
+            return validError(result);
+        }
         User loginUser = userService.login(dto);
         if (Objects.nonNull(loginUser)) {
             return UnifyResponse.success(loginUser);
         }
         return UnifyResponse.failure("用户名或密码错误！");
+    }
+
+    private UnifyResponse validError(BindingResult result) {
+        List<ObjectError> allErrors = result.getAllErrors();
+        ObjectError objectError = allErrors.get(0);
+        String defaultMessage = objectError.getDefaultMessage();
+        return UnifyResponse.failure(defaultMessage);
     }
 
 }

@@ -38,6 +38,11 @@ public class HospitalController {
         return hospitalService.page(pageable);
     }
 
+    @PostMapping("/getAll")
+    public UnifyResponse getAll() {
+        return UnifyResponse.success(hospitalService.getAll());
+    }
+
     @PostMapping("/findOne")
     public UnifyResponse findOne(@RequestBody HospitalDto dto) {
         return UnifyResponse.success(hospitalService.findOne(dto.getId()));

@@ -5,6 +5,8 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
+
 /**
  * Licensed to CMIM,Inc. under the terms of the CMIM
  * Software License version 1.0.
@@ -16,5 +18,7 @@ import org.springframework.stereotype.Repository;
  **/
 @Repository
 public interface HospitalRepository extends JpaRepository<Hospital, Long>, JpaSpecificationExecutor<Hospital> {
+
+    List<Hospital> findByIsDelete(Integer isDelete);
 
 }

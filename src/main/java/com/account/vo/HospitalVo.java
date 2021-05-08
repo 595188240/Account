@@ -1,6 +1,4 @@
-package com.account.dto;
-
-import javax.validation.constraints.NotNull;
+package com.account.vo;
 
 /**
  * Licensed to CMIM,Inc. under the terms of the CMIM
@@ -9,18 +7,25 @@ import javax.validation.constraints.NotNull;
  * information regarding copyright ownership.
  * ----------------------------------------------------------------------------
  * Date        Author        Version        Comments
- * 2021/5/7     ffdeng         1.0       Initial Version
+ * 2021/5/8     ffdeng         1.0       Initial Version
  **/
-public class IdDto {
+public class HospitalVo {
+    private long id;
+    private String name;
 
-    @NotNull(message = "id不能为空")
-    private Long id;
-
-    public Long getId() {
+    public long getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(long id) {
         this.id = id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 }

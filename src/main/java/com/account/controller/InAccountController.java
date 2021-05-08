@@ -5,10 +5,13 @@ import com.account.dto.InDto;
 import com.account.response.UnifyResponse;
 import com.account.service.InService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.ObjectError;
+import org.springframework.web.bind.MethodArgumentNotValidException;
+import org.springframework.web.bind.annotation.*;
+
+import javax.validation.Valid;
+import java.util.List;
 
 /**
  * Licensed to CMIM,Inc. under the terms of the CMIM
@@ -21,6 +24,7 @@ import org.springframework.web.bind.annotation.RestController;
  **/
 @RestController
 @RequestMapping("/inAccount")
+@RestControllerAdvice
 public class InAccountController {
 
     @Autowired
@@ -37,8 +41,19 @@ public class InAccountController {
     }
 
     @PostMapping("/getOne")
-    public UnifyResponse getOne(@RequestBody IdDto dto) {
+    @ExceptionHandler(MethodArgumentNotValidException.class)
+    public UnifyResponse getOne(@Valid @RequestBody IdDto dto, BindingResult result) {
+        if (result.hasErrors()) {
+            return validError(result);
+        }
         return UnifyResponse.success(inService.getOne(dto.getId()));
+    }
+
+    private UnifyResponse validError(BindingResult result) {
+        List<ObjectError> allErrors = result.getAllErrors();
+        ObjectError objectError = allErrors.get(0);
+        String defaultMessage = objectError.getDefaultMessage();
+        return UnifyResponse.failure(defaultMessage);
     }
 
     @PostMapping("/edit")

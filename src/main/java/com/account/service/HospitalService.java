@@ -4,6 +4,7 @@ import com.account.dto.HospitalDto;
 import com.account.entity.Hospital;
 import com.account.repository.HospitalRepository;
 import com.account.response.UnifyResponse;
+import com.account.vo.HospitalVo;
 import com.account.vo.PageResultModel;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -80,4 +81,15 @@ public class HospitalService {
         hospitalRepository.save(one);
     }
 
+    public List<HospitalVo> getAll() {
+        List<Hospital> hospitals = hospitalRepository.findByIsDelete(0);
+        List<HospitalVo> result = new ArrayList<>(hospitals.size());
+        hospitals.forEach(item -> {
+            HospitalVo vo = new HospitalVo();
+            vo.setId(item.getId());
+            vo.setName(item.getName());
+            result.add(vo);
+        });
+        return result;
+    }
 }
