@@ -7,10 +7,7 @@ import com.account.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.ObjectError;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.bind.annotation.RestControllerAdvice;
+import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.util.List;
@@ -26,7 +23,8 @@ import java.util.Objects;
  * 2021/4/28     ffdeng         1.0       Initial Version
  **/
 @RestController
-@RestControllerAdvice
+@ControllerAdvice
+@RequestMapping("/login")
 public class LoginController {
 
     @Autowired
