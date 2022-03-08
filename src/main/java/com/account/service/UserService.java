@@ -11,10 +11,12 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.criteria.Predicate;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * Licensed to CMIM,Inc. under the terms of the CMIM
@@ -72,4 +74,8 @@ public class UserService {
                 dto.getUserName(), dto.getPassword(), 0);
     }
 
+    @Transactional(readOnly = true)
+    public UnifyResponse getPageUser() {
+        return UnifyResponse.success(userRepository.findUser().collect(Collectors.toList()));
+    }
 }

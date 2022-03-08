@@ -10,6 +10,7 @@ package com.account.vo;
  * 2021/5/8     ffdeng         1.0       Initial Version
  **/
 public class HospitalVo {
+
     private long id;
     private String name;
 

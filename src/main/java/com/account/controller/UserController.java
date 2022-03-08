@@ -5,10 +5,7 @@ import com.account.entity.User;
 import com.account.response.UnifyResponse;
 import com.account.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 /**
  * Licensed to CMIM,Inc. under the terms of the CMIM
@@ -42,5 +39,10 @@ public class UserController {
     @PostMapping("/pageUser")
     public UnifyResponse pageUser() {
         return userService.pageUser();
+    }
+
+    @GetMapping("/pageUser")
+    public UnifyResponse getPageUser() {
+        return userService.getPageUser();
     }
 }

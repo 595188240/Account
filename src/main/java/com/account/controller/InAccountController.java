@@ -82,8 +82,13 @@ public class InAccountController {
     }
 
     @RequestMapping("/excel")
-    public void excel(HttpServletResponse response, HttpServletRequest request) throws Exception {
-        List<DataEntity> dataList = getDate();
+    public void excel(HttpServletResponse response, HttpServletRequest request) {
+        List<DataEntity> dataList = null;
+        try {
+            dataList = getDate();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
 
         String fileName;
         String[] title;

@@ -274,7 +274,9 @@ public class ExcelUtil {
     /**
      * 导出excel
      */
-    public static void exportExcel(List data, String name, String[] title, String[] field, HttpServletRequest request, HttpServletResponse response) throws UnsupportedEncodingException {
+    public static void exportExcel(List data, String name, String[] title, String[] field,
+                                   HttpServletRequest request, HttpServletResponse response)
+            throws UnsupportedEncodingException {
         String[][] content = new String[data.size()][title.length];
         //第一步
         Workbook wb = new XSSFWorkbook();
